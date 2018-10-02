@@ -122,3 +122,62 @@ function invoice_payment() {
 		<?php
 	}
   add_shortcode( 'invoice-payment', 'invoice_payment' );
+
+// Add Shortcode For Paying Invoices
+function invoice_payment_confirmation() {
+	if (isset($_POST['dn']))
+	{
+	   $dn = $_POST['dn'];
+	}
+	if (isset($_POST['en']))
+	{
+		 $en = $_POST['en'];
+	}
+	if (isset($_POST['amountCharged']))
+	{
+		 $amountCharged = $_POST['amountCharged'];
+	}
+	if (isset($_POST['totalDue']))
+	{
+		 $totalDue = $_POST['totalDue'];
+	}
+	if (isset($_POST['amountRemaining']))
+	{
+		 $amountRemaining = $_POST['amountRemaining'];
+	}
+	$url = 'http://coronet-debug.opticut.net/api.php';
+	$args = array(
+		'body' => array(
+		'action' => 'set',
+		'apikey' => '5d445rlklkjrnc545v431',
+		'dn' => $dn,
+		'en' => $en,
+		'pt' => $amountCharged,
+		'float' => $amountRemaining,
+	)
+	);
+	$request = wp_remote_post( $url, $args );
+	if( is_wp_error( $request ) ) {
+		return false; // Bail early
+	}
+	$body = wp_remote_retrieve_body( $request );
+	// $data = json_encode($body, true);
+	if( ! empty( $body ) ) {
+
+		echo '<div id="results" style="display:none;">';
+			echo $body;
+		echo '</div>';
+		echo '<div id="confirmation">';
+		echo '<h5><b>Payment Successful</b></h5>';
+		echo '<p>Your payment of <b>$';
+		echo $amountCharged;
+		echo '</b> was completed successfully.</p>';
+		echo '<p>Your remaining balance is: <b>$';
+		echo $amountRemaining;
+		echo '</b>.</p>';
+		echo '<p>Thank you for your business!</p>';
+	}
+	?>
+	<?php
+}
+	add_shortcode( 'invoice-payment-confirmation', 'invoice_payment_confirmation' );
