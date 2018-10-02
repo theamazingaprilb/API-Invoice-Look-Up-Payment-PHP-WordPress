@@ -1,4 +1,9 @@
-<?php // Add Shortcode For Paying Invoices
+<?php 
+// Add Shortcode For Paying Invoices
+// Author: Doug Marshall
+// Author Site: http://www.theamazingdoug.com
+// Author Github: https://www.github.com/justplaindoug
+
 function invoice_payment() {
 	if (isset($_POST['dn']))
 	{
