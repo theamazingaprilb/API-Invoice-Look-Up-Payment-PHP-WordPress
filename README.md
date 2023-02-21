@@ -1,7 +1,7 @@
 # API-Invoice-Look-Up-Payment-PHP-WordPress
-// Author: Doug Marshall
-// Author Site: http://www.theamazingdoug.com
-// Author Github: https://www.github.com/justplaindoug
+// Author: April Marshall
+// Author Site: http://www.aprilagain.com
+// Author Github: https://www.github.com/theamazingaprilb
 
 A series of functions developed for a WordPress site that needed to make API calls in order to look up individual invoices and process payments, as well as looking up all invoices for a date range and converting them to an IIF file for import into Quickbooks.
 
